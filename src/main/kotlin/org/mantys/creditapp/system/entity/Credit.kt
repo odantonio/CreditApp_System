@@ -14,6 +14,6 @@ data class Credit (
     @Column(nullable = false) var dayOfInstallment: LocalDate,
     @Column(nullable = false) var numberOfInstallments: Int = 0,
     @Enumerated var status: Status = Status.IN_PROGRESS,
-    @ManyToOne val customer: Customer? = null,
+    @ManyToOne var customer: Customer? = null,
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) var id : Long? = null
 )
