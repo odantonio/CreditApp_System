@@ -7,14 +7,14 @@ import java.time.LocalDate
 
 data class CreditDto(
     val creditValue: BigDecimal,
-    val dayFirtInstallment: LocalDate,
+    val dayFirstInstallment: LocalDate,
     val numberOfInstallment: Int,
-    val cutomerId: Long
+    val customerId: Long
 ) {
     fun toEntity(): Credit = Credit(
         creditValue = this.creditValue,
-        dayOfInstallment = this.dayFirtInstallment,
+        dayFirstInstallment = this.dayFirstInstallment,
         numberOfInstallments = this.numberOfInstallment,
-        customer = Customer(id = this.cutomerId)
+        customer = Customer(id = this.customerId)
     )
 }

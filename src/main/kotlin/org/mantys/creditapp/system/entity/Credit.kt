@@ -11,7 +11,7 @@ import java.util.*
 data class Credit (
     @Column(nullable = false, unique = true) val creditCode: UUID = UUID.randomUUID(),
     @Column(nullable = false) var creditValue: BigDecimal = BigDecimal.ZERO,
-    @Column(nullable = false) var dayOfInstallment: LocalDate,
+    @Column(nullable = false) var dayFirstInstallment: LocalDate,
     @Column(nullable = false) var numberOfInstallments: Int = 0,
     @Enumerated var status: Status = Status.IN_PROGRESS,
     @ManyToOne var customer: Customer? = null,

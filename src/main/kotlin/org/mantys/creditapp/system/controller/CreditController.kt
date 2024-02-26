@@ -24,16 +24,16 @@ class CreditController(
     }
 
     @GetMapping
-    fun findAllByCustomerId(@RequestParam(value = "customer_id") customerId: Long): ResponseEntity<List<CreditViewList>> {
+    fun findAllByCustomerId(@RequestParam(value = "customerId") customerId: Long): ResponseEntity<List<CreditViewList>> {
         val credit: List<CreditViewList> = this.creditService.findAllByCustomer(customerId).stream()
             .map { credit: Credit -> CreditViewList(credit) }
             .collect(Collectors.toList())
         return ResponseEntity.status(HttpStatus.OK).body(credit)
     }
 
-    @GetMapping("/{credit_code}")
+    @GetMapping("/{creditCode}")
     fun findByCreditCode(
-        @RequestParam(value = "customer_id") customerId: Long,
+        @RequestParam(value = "customerId") customerId: Long,
         @PathVariable creditCode: UUID
     ): ResponseEntity<CreditView> {
         val credit: Credit = this.creditService.findByCreditCode(customerId, creditCode)
