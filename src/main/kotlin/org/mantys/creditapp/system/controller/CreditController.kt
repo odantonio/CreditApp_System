@@ -1,5 +1,6 @@
 package org.mantys.creditapp.system.controller
 
+import jakarta.validation.Valid
 import org.mantys.creditapp.system.dto.CreditDto
 import org.mantys.creditapp.system.dto.CreditView
 import org.mantys.creditapp.system.dto.CreditViewList
@@ -17,10 +18,10 @@ class CreditController(
     private val creditService: CreditService
 ) {
     @PostMapping
-    fun saveCredit(@RequestBody creditDto: CreditDto): ResponseEntity<String> {
+    fun saveCredit(@RequestBody @Valid creditDto: CreditDto): ResponseEntity<String> {
         val savedCredit: Credit = this.creditService.save(creditDto.toEntity())
         return ResponseEntity.status(HttpStatus.CREATED)
-            .body("Credit ${savedCredit.creditCode} - Customer ${savedCredit.customer?.firstName} saved successfully!")
+            .body("Request Credit:${savedCredit.creditCode} form Customer:${savedCredit.customer?.lastName} saved successfully!")
     }
 
     @GetMapping

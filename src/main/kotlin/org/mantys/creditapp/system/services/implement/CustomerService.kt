@@ -1,6 +1,7 @@
 package org.mantys.creditapp.system.services.implement
 
 import org.mantys.creditapp.system.entity.Customer
+import org.mantys.creditapp.system.exceptions.BusinessHandler
 import org.mantys.creditapp.system.repository.CustomerRepository
 import org.mantys.creditapp.system.services.InterCustomerService
 import org.springframework.beans.factory.annotation.Autowired
@@ -20,12 +21,14 @@ class CustomerService(
 
     override fun findById(id: Long): Customer {
         return this.customerRepository.findById(id).orElseThrow {
-            throw RuntimeException("ID $id not founded.")
+            throw BusinessHandler("ID $id not founded.")
         }
     }
 
+    // Há um erro de retorno da função, que diz sucesso mesmo que o id não exista
     override fun delete(id: Long) {
-        return this.customerRepository.deleteById(id)
+        val userDel: Customer = this.findById(id)
+        return this.customerRepository.delete(userDel)
     }
 
 }
